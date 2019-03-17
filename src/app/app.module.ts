@@ -1,5 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app.routing';
 
@@ -13,6 +13,17 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { GoogleAnaEventTrackService } from './services/ga-event-tracking.service';
 
+import { AppConfig } from './app.config';
+import { HttpClientModule } from '@angular/common/http';
+
+// APP_INITIALIZER: before app initialise, load external configuration
+export function BeforeInitApp(appInitService: AppConfig) {
+  return (): Promise<any> => { 
+    return appInitService.load();
+  }
+}
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,12 +35,13 @@ import { GoogleAnaEventTrackService } from './services/ga-event-tracking.service
     NavbarComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule
+    BrowserModule, AppRoutingModule, HttpClientModule
   ],
-  providers: [ Title, GoogleAnaEventTrackService ],
+  providers: [ Title, GoogleAnaEventTrackService, AppConfig,
+    { provide: APP_INITIALIZER, useFactory: BeforeInitApp, deps: [AppConfig], multi: true }],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
-  constructor(protected _googleAna: GoogleAnaEventTrackService) {}
+  constructor() { }
 }
