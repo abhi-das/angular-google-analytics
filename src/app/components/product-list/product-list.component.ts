@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { GoogleAnaEventTrackService } from '../../services/ga-event-tracking.service';
+// import { GoogleAnaEventTrackService } from '../../services/ga-event-tracking.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,7 +12,8 @@ export class ProductListComponent implements OnInit {
 
   title = "Product List";
   
-  constructor(private _titleSrv: Title, private _ga: GoogleAnaEventTrackService ) { 
+  // constructor(private _titleSrv: Title, private _ga: GoogleAnaEventTrackService ) { 
+  constructor(private _titleSrv: Title ) { 
     this._titleSrv.setTitle("Product List");
   }
 
@@ -21,11 +22,11 @@ export class ProductListComponent implements OnInit {
   }
 
   showCaseLink() {
-    this._ga.gaEmitEvent("showcaseCategory", "world_feature_post", "My Featured Post", 10);
+    // this._ga.gaEmitEvent("showcaseCategory", "world_feature_post", "My Featured Post", 10);
   }
   
   homeInteriorLink() {
-    this._ga.gaEmitEvent("homeInteriorCategory", "design_home_interior", "Design Home", 5);
+    // this._ga.gaEmitEvent("homeInteriorCategory", "design_home_interior", "Design Home", 5);
   }
 
 }

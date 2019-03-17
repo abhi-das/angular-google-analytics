@@ -26,10 +26,12 @@ import { GoogleAnaEventTrackService } from './services/ga-event-tracking.service
   imports: [
     BrowserModule, AppRoutingModule
   ],
-  providers: [ Title, GoogleAnaEventTrackService ],
+  // providers: [ Title, GoogleAnaEventTrackService ],
+  providers: [ Title ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
 
-  constructor(protected _googleAna: GoogleAnaEventTrackService) {}
+  // constructor(protected _googleAna: GoogleAnaEventTrackService) {}
+  constructor() {}
 }
