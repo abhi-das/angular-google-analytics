@@ -1,0 +1,57 @@
+version: 0.1
+
+env:
+    variables:
+      S3_BUCKET: "arn:aws:s3:::myappbucket11"
+      APP_NAME: "myappbucket11"
+      BUILD_ENV : "prod"
+      AWS_ACCESS_KEY_ID: "AKIAYGZEILFPF7G3VE5F"
+      AWS_SECRET_ACCESS_KEY: "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"
+
+stages:
+  - build
+  - deploy
+
+build: 
+  stage: 'build'
+  script: 
+    - apt update
+    - apt install -y curl
+    - apt install -y nodejs
+    - npm install -y npm@latest -g
+    - npm install -g @angular/cli
+    - cd /builds
+    - rm package-lock.json
+    - npm install
+    - cd ..
+    - echo Build started on `date`
+    - ng build --${BUILD_ENV}
+  cache: 
+    paths: 
+      - /builds/node_modules/
+  artifacts: 
+    when: on_success    
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    paths: 
+      - /builds/dist/
+  only: 
+    - master
+    
+deploy: 
+  stage: 'deploy'
+  script: 
+    - apt update
+    - apt install -y software-properties-common
+    - apt install -y python-dev  
+    - apt install -y python-pip
+    - pip install awscli
+    - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+    - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+    - aws configure set region eu-west-2
+    - mv dist/
+    - cd dist
+    - cd .. 
+    - aws deploy push --application-name ${APP_NAME} --s3-location ${S3_BUCKET} --ignore-hidden-files --source dist
+    - echo Build completed on `date`
+  only: 
+    - master
