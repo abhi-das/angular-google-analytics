@@ -1,13 +1,5 @@
 version: 0.1
 
-env:
-    variables:
-      S3_BUCKET: "arn:aws:s3:::myappbucket11"
-      APP_NAME: "myappbucket11"
-      BUILD_ENV : "prod"
-      AWS_ACCESS_KEY_ID: "AKIAYGZEILFPF7G3VE5F"
-      AWS_SECRET_ACCESS_KEY: "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"
-
 stages:
   - build
   - deploy
