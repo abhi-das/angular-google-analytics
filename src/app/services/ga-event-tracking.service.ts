@@ -22,9 +22,13 @@ export class GoogleAnaEventTrackService {
                 // console.log(evt);
                 (<any>window).gtag('config', this._siteConfig['ga-site-key'], {
                     'page_title' : this._titleSrv.getTitle(),
-                    'page_path': evt.urlAfterRedirects
+                    'page_path': evt.urlAfterRedirects,
+                    'testuserprofile': 'user101'
                 });
 
+                // (<any>window).gtag('config', this._siteConfig['ga-site-key'], {
+                //     'custom_map': {'profiles<Index>': 'total_profiles'}
+                // });
             }
         });
     }
@@ -37,5 +41,14 @@ export class GoogleAnaEventTrackService {
             'event_label': eventLabel,
             'value': eventValue
         });
+
+        // (<any>window).gtag('event', 'profiles', {
+        //     'total_profiles': 20
+        // })
+    }
+
+    public gaEmitEventForLoadRecordspublic() {
+    
+        (<any>window).gtag('event', 'foo', {'age': 12, 'avg_page_load_time': 1});
     }
 }

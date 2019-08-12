@@ -1,5 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app.routing';
 
@@ -15,6 +15,7 @@ import { GoogleAnaEventTrackService } from './services/ga-event-tracking.service
 
 import { AppConfig } from './app.config';
 import { HttpClientModule } from '@angular/common/http';
+import { AccordComponent } from './components/accord/accord.component';
 
 // APP_INITIALIZER: before app initialise, load external configuration
 export function BeforeInitApp(appInitService: AppConfig) {
@@ -32,14 +33,16 @@ export function BeforeInitApp(appInitService: AppConfig) {
     ContactUsComponent,
     ProductListComponent,
     PageNotFoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    AccordComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule
   ],
   providers: [ Title, GoogleAnaEventTrackService, AppConfig,
     { provide: APP_INITIALIZER, useFactory: BeforeInitApp, deps: [AppConfig], multi: true }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule {
 

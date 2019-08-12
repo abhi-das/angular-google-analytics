@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this._ga.gaEmitEventForLoadRecordspublic();
   }
 
   showCaseLink() {
