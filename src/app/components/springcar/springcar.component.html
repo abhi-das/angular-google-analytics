@@ -1,0 +1,6 @@
+<div>
+  <div *ngFor="let car of carlist">
+    <h4>{{car.carName | titlecase }} </h4>
+    <p class="test-mute">{{ car.carPrice}} <span class="badge">{{car.carId}}</span></p>
+  </div>
+</div>

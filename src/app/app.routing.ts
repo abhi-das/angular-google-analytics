@@ -5,6 +5,7 @@ import { HelpComponent } from './components/help/help.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { SpringcarComponent } from './components/springcar/springcar.component';
 
 const appRoutes: Routes = [
     {
@@ -33,6 +34,13 @@ const appRoutes: Routes = [
         component: ProductListComponent,
         data: {
             pageName: "Product List"
+        }
+    },
+    {
+        path: "springboot",
+        component: SpringcarComponent,
+        data: {
+            pageName: "Spring Boot"
         }
     },
     {

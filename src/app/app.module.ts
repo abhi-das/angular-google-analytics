@@ -16,6 +16,8 @@ import { GoogleAnaEventTrackService } from './services/ga-event-tracking.service
 import { AppConfig } from './app.config';
 import { HttpClientModule } from '@angular/common/http';
 import { AccordComponent } from './components/accord/accord.component';
+import { SpringcarComponent } from './components/springcar/springcar.component';
+import { SpringService } from './services/spring.service';
 
 // APP_INITIALIZER: before app initialise, load external configuration
 export function BeforeInitApp(appInitService: AppConfig) {
@@ -34,12 +36,13 @@ export function BeforeInitApp(appInitService: AppConfig) {
     ProductListComponent,
     PageNotFoundComponent,
     NavbarComponent,
-    AccordComponent
+    AccordComponent,
+    SpringcarComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule
   ],
-  providers: [ Title, GoogleAnaEventTrackService, AppConfig,
+  providers: [ Title, GoogleAnaEventTrackService, AppConfig, SpringService,
     { provide: APP_INITIALIZER, useFactory: BeforeInitApp, deps: [AppConfig], multi: true }],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
