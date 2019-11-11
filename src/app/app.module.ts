@@ -18,10 +18,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AccordComponent } from './components/accord/accord.component';
 import { SpringcarComponent } from './components/springcar/springcar.component';
 import { SpringService } from './services/spring.service';
+import { StoreChange } from './services/store-change.service';
 
 // APP_INITIALIZER: before app initialise, load external configuration
 export function BeforeInitApp(appInitService: AppConfig) {
-  return (): Promise<any> => { 
+  return (): Promise<any> => {
     return appInitService.load();
   }
 }
@@ -42,10 +43,10 @@ export function BeforeInitApp(appInitService: AppConfig) {
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule
   ],
-  providers: [ Title, GoogleAnaEventTrackService, AppConfig, SpringService,
+  providers: [Title, StoreChange, GoogleAnaEventTrackService, AppConfig, SpringService,
     { provide: APP_INITIALIZER, useFactory: BeforeInitApp, deps: [AppConfig], multi: true }],
   bootstrap: [AppComponent],
-  schemas: [ NO_ERRORS_SCHEMA ]
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule {
 
